@@ -6,58 +6,39 @@
 
 class Solution {
 public:
-
-    std::vector<int> twoSum(const std::vector<int>& numbers, int target) {
-        int left = 0; int right = numbers.size()-1;
-
-        while(left < right)
-        {
-            if(numbers[left]+numbers[right] == target)
-                break;
-            
-            if(numbers[left]+numbers[right] < target )
-                left++;
-            else
-                right--;
-        }
-
-        return {numbers[left], numbers[right]};
-    }
     
     std::vector<std::vector<int>> threeSum(std::vector<int>& nums) 
     {
-        std::set<std::vector<int>> res;
         std::sort(nums.begin(), nums.end());
-
+        std::vector<std::vector<int>> res;
         for(int i = 0; i < nums.size(); i++)
         {
-            std::vector<int> tmp = twoSum(std::vector<int>(nums.begin()+i, nums.end()), -nums[i]);
-            if(!tmp.empty())
+            int left = i+1;
+            int right = nums.size()-1;
+
+            while(left < right)
             {
-                tmp.push_back(nums[i]);
-                std::sort(tmp.begin(), tmp.end());
-                res.insert(tmp);
-                // if(res.insert(tmp).second)
-                //     i = 1; left = 0; right = nums.size() - 1;
+                if(nums[left] + nums[right] == -nums[i])
+                {
+                    res.push_back({nums[i], nums[left], nums[right]});
+                }
 
-                //std::cout << left << ", " << i << ", " << right << std::endl;
+                if(nums[left] + nums[right] < -nums[i] )
+                    left++;
+                else
+                    right--;
             }
-
-            // if(nums[i] + nums[left] + nums[right] < 0)
-            //     left++;
-            // else
-            //     right--;
         }
 
-        return std::vector<std::vector<int>>(res.begin(), res.end());
+        return res;
     }
 };
 
 int main()
 {
-    std::vector<int> height = {3,0,-2,-1,1,2};
+    std::vector<int> height = {3,0,-2,-1,1,1};
 
-    // -2, -1, 0, 1, 2, 3
+    // -2, -1, 0, 1, 1, 3
     
     std::vector res = Solution().threeSum(height);
 
