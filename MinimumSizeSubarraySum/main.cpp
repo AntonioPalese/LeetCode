@@ -10,9 +10,9 @@ public:
         if(*std::max_element(nums.begin(), nums.end()) >= target)
             return 1;
 
-        for(int ws = 1; ws < nums.size() ; ws++)
+        for(int ws = 1; ws <= nums.size(); ws++)
         {
-            for(int i = 0; i < nums.size();i++)
+            for(int i = 0; i + ws <= nums.size();i++)
             {
                 int tot = std::accumulate(nums.begin()+i, nums.begin()+i+ws, 0);
                 if(tot >= target)
@@ -26,7 +26,7 @@ public:
 
 int main()
 {
-    std::vector<int> vec = {1, 2, 3, 4, 5}; int t = 11;
+    std::vector<int> vec = {1, 2, 3, 4, 5}; int t = 15;
     
     int res = Solution().minSubArrayLen(t, vec);
 
