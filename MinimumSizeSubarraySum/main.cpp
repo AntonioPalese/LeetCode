@@ -1,34 +1,37 @@
 #include <vector>
 #include <iostream>
-#include <numeric>
-#include <algorithm>
 
 class Solution {
 public:
     int minSubArrayLen(int target, std::vector<int>& nums) {
-        
-        if(*std::max_element(nums.begin(), nums.end()) >= target)
-            return 1;
 
-        for(int ws = 1; ws <= nums.size(); ws++)
+        int right = 0, left = 0, current_sum = 0;
+        int res = INT_MAX;
+        while(right < nums.size())
         {
-            for(int i = 0; i + ws <= nums.size();i++)
+            current_sum += nums[right];
+
+            while(current_sum >= target)
             {
-                int tot = std::accumulate(nums.begin()+i, nums.begin()+i+ws, 0);
-                if(tot >= target)
-                    return ws;
+                res = right - left + 1 < res ? right - left + 1 : res;
+                current_sum -= nums[left];
+                left++;
             }
+
+            right++;
         }
 
-        return 0;
+        return res != INT_MAX ? res : 0;
     }
 };
 
 int main()
 {
-    std::vector<int> vec = {1, 2, 3, 4, 5}; int t = 15;
+    std::vector<int> vec = {1, 2, 3, 4, 5}; int t = 11;
     
     int res = Solution().minSubArrayLen(t, vec);
 
     std::cout << res << std::endl;
+
+    return 0;
 }
