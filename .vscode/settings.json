@@ -72,6 +72,8 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "__nullptr": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "__tree": "cpp",
+        "map": "cpp"
     }
 }
