@@ -74,6 +74,7 @@
         "__nullptr": "cpp",
         "set": "cpp",
         "__tree": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "regex": "cpp"
     }
 }
