@@ -1,8 +1,6 @@
 #include <vector>
 #include <map>
 
-
-
 enum class CamEnum
 {
     COL_01  = 0x01,
@@ -63,23 +61,41 @@ std::map<CamEnum, std::map<std::string, std::vector<int>>> test(int cameras, int
         res[CamEnum::MONO_02].insert({"mean", {means[4]}}); res[CamEnum::MONO_02].insert({"std", {stds[4]}});
     }break;
     case (int)CamEnum::COL_01 | (int)CamEnum::MONO_01 | (int)CamEnum::MONO_02 | (int)PreProcMode::OLD_PREPROC:
-        break; // old //0, 1, 2 return oldPreproc not forcechannels 
+    {        
+        res[CamEnum::COL_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::COL_01].insert({"std", {stds[0], stds[1], stds[2]}});
+        res[CamEnum::MONO_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_01].insert({"std", {stds[0], stds[1], stds[2]}});
+        res[CamEnum::MONO_02].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_02].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::COL_01 | (int)CamEnum::MONO_01 | (int)PreProcMode::OLD_PREPROC:
-        break; // old //0, 1, 2 return oldPreproc not forced
+    {
+        res[CamEnum::COL_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::COL_01].insert({"std", {stds[0], stds[1], stds[2]}});
+        res[CamEnum::MONO_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_01].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::COL_01 | (int)CamEnum::MONO_02 | (int)PreProcMode::OLD_PREPROC:
-        break; // old 
+    {
+        res[CamEnum::COL_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::COL_01].insert({"std", {stds[0], stds[1], stds[2]}});
+        res[CamEnum::MONO_02].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_02].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::MONO_01 | (int)CamEnum::MONO_02 | (int)PreProcMode::OLD_PREPROC:
-        break;
+    {
+        res[CamEnum::MONO_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_01].insert({"std", {stds[0], stds[1], stds[2]}});
+        res[CamEnum::MONO_02].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_02].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::MONO_01 | (int)PreProcMode::OLD_PREPROC:
-        break;
+    {
+        res[CamEnum::MONO_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_01].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::MONO_02 | (int)PreProcMode::OLD_PREPROC:
-        break;
+    {
+        res[CamEnum::MONO_02].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::MONO_02].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break;
     case (int)CamEnum::COL_01 | (int)PreProcMode::OLD_PREPROC:
-        break;    
+    {
+        res[CamEnum::COL_01].insert({"mean", {means[0], means[1], means[2]}}); res[CamEnum::COL_01].insert({"std", {stds[0], stds[1], stds[2]}});
+    }break; 
     default:
         break;
     }
-
     return res;
 
 }
