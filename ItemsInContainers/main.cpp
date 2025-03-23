@@ -31,6 +31,10 @@ std::vector<std::tuple<int, int, int>> getInContainers(const std::string& s)
 std::vector<int> itemsInContainers(std::string s, std::vector<int> starts, std::vector<int> ends)
 {  
     std::vector<std::tuple<int, int, int>> acc = getInContainers(s);
+    if(acc.empty()) return {};
+
+    std::sort(acc.begin(), acc.end(), [](const auto& a, const auto& b){return std::get<2>(a) < std::get<2>(b);});
+
     for(int i = 0; i < acc.size(); i++)
         printf("start : %d, end : %d, count : %d\n", std::get<0>(acc[i]), std::get<1>(acc[i]), std::get<2>(acc[i]));
 
