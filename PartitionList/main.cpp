@@ -32,7 +32,18 @@ public:
         ListNode* middle = right;
 
         while(head){
-            if(head->val <= x && middle){
+
+            if(head->val == x && !middle){
+                middle = head;
+            }else if(head->val == x && middle){
+                if(left){
+                    left->next = head;
+                }else
+                    left_head = head;
+                left = head;
+            }
+
+            if(head->val < x){
                 if(left){
                     left->next = head;
                 }else
@@ -44,10 +55,7 @@ public:
                 }else
                     right_head = head;
                 right = head;
-            }else if(!middle){
-                middle = head;
             }
-
             head = head->next;
         } 
         left->next = middle;
