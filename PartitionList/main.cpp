@@ -1,9 +1,3 @@
-/*
-* Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
-*
-*  You should preserve the original relative order of the nodes in each of the two partitions.
-* */
-
 #include <vector>
 #include <iostream>
 #include <string>
@@ -22,9 +16,6 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
 
-        // 1, 4, 3, 2, 5, 2; x = 3
-        // 1, 2, 2, 3, 4, 5;
-
         ListNode* left = nullptr;
         ListNode* left_head = left;
         ListNode* right = nullptr;
@@ -32,7 +23,6 @@ public:
         ListNode* middle = right;
 
         while(head){
-
             if(head->val == x && !middle){
                 middle = head;
             }else if(head->val == x && middle){
@@ -58,9 +48,13 @@ public:
             }
             head = head->next;
         } 
-        left->next = middle;
-        middle->next = right_head;
-        right->next = nullptr;
+
+        if(left)
+            left->next = middle;
+        if(middle)
+            middle->next = right_head;
+        if(right)
+            right->next = nullptr;
         return left_head;
     }
 };
