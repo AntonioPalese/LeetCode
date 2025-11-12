@@ -16,46 +16,26 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
 
-        ListNode* left = nullptr;
-        ListNode* left_head = left;
-        ListNode* right = nullptr;
-        ListNode* right_head = right;
-        ListNode* middle = right;
-
+        ListNode* left = new ListNode();
+        ListNode* right = new ListNode();
+        ListNode* ltail = left;
+        ListNode* rtail = right;
+        
         while(head){
-            if(head->val == x && !middle){
-                middle = head;
-            }else if(head->val == x && middle){
-                if(left){
-                    left->next = head;
-                }else
-                    left_head = head;
-                left = head;
-            }
-
             if(head->val < x){
-                if(left){
-                    left->next = head;
-                }else
-                    left_head = head;
-                left = head;
-            }else if(head->val > x){
-                if(right){
-                    right->next = head;
-                }else
-                    right_head = head;
-                right = head;
+                ltail->next = head;
+                ltail = head;
+            }else{
+                rtail->next = head;
+                rtail = head;
             }
             head = head->next;
-        } 
+        }
 
-        if(left)
-            left->next = middle;
-        if(middle)
-            middle->next = right_head;
-        if(right)
-            right->next = nullptr;
-        return left_head;
+        ltail->next = right->next;
+        rtail->next = nullptr;
+        return left->next;
+
     }
 };
 
